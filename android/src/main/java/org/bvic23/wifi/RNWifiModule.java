@@ -10,9 +10,10 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.uimanager.IllegalViewOperationException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.List;
 
@@ -36,26 +37,21 @@ public class RNWifiModule extends ReactContextBaseJavaModule {
 	@ReactMethod
 	public void getWifiList(final Callback callback) {
 		try {
-			List < ScanResult > results = wifi.getScanResults();
-			JSONArray wifiArray = new JSONArray();
+			final List < ScanResult > results = wifi.getScanResults();
+			final WritableArray wifiArray = new WritableNativeArray();
 
 			for (ScanResult result: results) {
-				JSONObject wifiObject = new JSONObject();
+				final WritableMap wifiObject = new WritableNativeMap();
 				if(!result.SSID.equals("")){
-					try {
-            			wifiObject.put("SSID", result.SSID);
-			            wifiObject.put("BSSID", result.BSSID);
-			            wifiObject.put("isSecure", !result.capabilities.equals("[ESS]"));
-			            wifiObject.put("frequency", result.frequency);
-            			wifiObject.put("level", result.level);
-					} catch (JSONException e) {
-			          	callback.invoke(e.getMessage());
-					}
-					wifiArray.put(wifiObject);
+        			wifiObject.putString("SSID", result.SSID);
+		            wifiObject.putString("BSSID", result.BSSID);
+		            wifiObject.putBoolean("isSecure", !result.capabilities.equals("[ESS]"));
+        			wifiObject.putInt("level", result.level);
+					wifiArray.pushMap(wifiObject);
 				}
 			}
 
-			callback.invoke(null, wifiArray.toString());
+			callback.invoke(null, wifiArray);
 		} catch (IllegalViewOperationException e) {
 			callback.invoke(e.getMessage());
 		}
