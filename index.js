@@ -4,7 +4,7 @@ import {
 
 export function getWifiList() {
   return new Promise((resolve, reject) => {
-      NativeModules.RNWifiModule.getWifiList((err, list) => {        
+      NativeModules.RNWifi.getWifiList((err, list) => {    
         if (err) {
           return reject(err);
         }

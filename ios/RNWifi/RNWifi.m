@@ -9,16 +9,16 @@
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(getWifiList:(RCTResponseSenderBlock)callback) {
-    
-    NSMutableDictionary* result = [NSMutableDictionary new];
-    
+    NSMutableArray* result = [NSMutableArray new];
     for (NEHotspotNetwork *hotspotNetwork in [NEHotspotHelper supportedNetworkInterfaces]) {
-        result[@"SSID"] = hotspotNetwork.SSID;
-        result[@"BSSID"] = hotspotNetwork.BSSID;
-        result[@"isSecure"] = @(hotspotNetwork.secure);
-        result[@"level"] = @(hotspotNetwork.signalStrength);
+        NSMutableDictionary* hotspot = [NSMutableDictionary new];
+        hotspot[@"SSID"] = hotspotNetwork.SSID;
+        hotspot[@"BSSID"] = hotspotNetwork.BSSID;
+        hotspot[@"isSecure"] = @(hotspotNetwork.secure);
+        hotspot[@"level"] = @(hotspotNetwork.signalStrength);
+        [result addObject:hotspot];
     }
-    return callback(@[NSNull, result]);
+    return callback(@[[NSNull null], result]);
 }
 
 @end

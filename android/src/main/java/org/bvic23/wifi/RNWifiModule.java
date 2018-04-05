@@ -31,7 +31,7 @@ public class RNWifiModule extends ReactContextBaseJavaModule {
 
 	@Override
 	public String getName() {
-		return "RNWifiModule";
+		return "RNWifi";
 	}
 
 	@ReactMethod
