@@ -1,0 +1,8 @@
+
+*.xcuserstate
+android/build
+android/.idea
+android/.gradle
+*.iml
+*.jar
+

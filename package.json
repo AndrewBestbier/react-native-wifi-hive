@@ -1,0 +1,27 @@
+{
+  "name": "react-native-wifi",
+  "version": "0.0.1",
+  "description": "React native support for wifi list.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvic23/react-native-get-pixel.git"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "android",
+    "ios",
+    "images",
+    "image",
+    "image-resizer",
+    "scaling",
+    "scale",
+    "resize"
+  ],
+  "peerDependencies": {
+    "react-native": ">=v0.14.2"
+  },
+  "author": "Viktor Belenyesi <bvic23@gmail.com>",
+  "license": "MIT",
+  "nativePackage": true
+}
